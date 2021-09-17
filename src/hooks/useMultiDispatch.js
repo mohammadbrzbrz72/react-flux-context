@@ -1,28 +1,28 @@
-import { useContext, useMemo, useRef } from "react";
+import { useContext, useMemo, useRef } from 'react'
 
-import { isItDefenitlyArrayOfFunction } from "../helper";
-import { ContextStore } from "../store";
+import { isItDefenitlyArrayOfFunction } from '../helper'
+import { ContextStore } from '../store'
 
 export function useMultiDispatch(dispatchesCallBack) {
-  const isNotInvoked = useRef(true);
+  const isNotInvoked = useRef(true)
 
   if (isNotInvoked.current) {
-    isItDefenitlyArrayOfFunction(dispatchesCallBack);
+    isItDefenitlyArrayOfFunction(dispatchesCallBack)
 
-    isNotInvoked.current = false;
+    isNotInvoked.current = false
   }
 
-  const [, dispatch] = useContext(ContextStore);
+  const [, dispatch] = useContext(ContextStore)
 
   const _dispatchesCallBack = useMemo(
     () =>
       dispatchesCallBack.map(
-        dispatchCallBack =>
+        (dispatchCallBack) =>
           (...props) =>
-            dispatchCallBack(dispatch, ...props),
+            dispatchCallBack(dispatch, ...props)
       ),
-    [],
-  );
+    []
+  )
 
-  return _dispatchesCallBack;
+  return _dispatchesCallBack
 }

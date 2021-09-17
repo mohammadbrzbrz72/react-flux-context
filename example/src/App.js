@@ -1,10 +1,14 @@
 import React from 'react'
 
-import { ExampleComponent } from 'react-flux-context'
-import 'react-flux-context/dist/index.css'
+import Layout from './Layout'
+import FluxContextProvider from './store'
 
 const App = () => {
-  return <ExampleComponent text="Create React Library Example 😄" />
+  return (
+    <FluxContextProvider>
+      <Layout />
+    </FluxContextProvider>
+  )
 }
 
 export default App
