@@ -14,20 +14,21 @@ And it has a redux-thunk and redux-persist usage too with very simple config.
 > ## **List**
 
 - [react-flux-context](#react-flux-context)
-  - [Installation](#installation)
-  - [store folder structure](#store-folder-structure)
-    - [`types`:](#types)
-    - [`reducers`](#reducers)
-    - [`actions`](#actions)
-    - [`create collection`](#create-collection)
-  - [useSelector](#useselector)
-  - [useDispatch](#usedispatch)
-  - [useMultiDispatch](#usemultidispatch)
-  - [useFluxContext](#usefluxcontext)
-  - [useFluxMultiContext](#usefluxmulticontext)
-  - [useRefStore](#userefstore)
-  - [Storage](#storage)
-  - [License](#license)
+- [Installation](#installation)
+- [store folder structure](#store-folder-structure)
+  - [`types`](#types)
+  - [`reducers`](#reducers)
+  - [`actions`](#actions)
+  - [`create collection`](#create-collection)
+  - [Project Example](#https://github.com/mohammadbrzbrz72/react-flux-context/tree/master/example)
+- [useSelector](#useselector)
+- [useDispatch](#usedispatch)
+- [useMultiDispatch](#usemultidispatch)
+- [useFluxContext](#usefluxcontext)
+- [useFluxMultiContext](#usefluxmulticontext)
+- [useRefStore](#userefstore)
+- [Storage](#storage)
+- [License](#license)
 
 <br/>
 <br/>
@@ -195,7 +196,7 @@ If you want to `persist` your data, set a **storage** type and **storageKey**
 > local (localStorage) <br />
 > session (sessionStorage)
 >
-> **storageKey**: <br />
+> **storageKey**:  <br />
 > "some text"
 
 ```jsx
@@ -386,18 +387,20 @@ function Component() {
 
 You can use it for binary stream data in webrtc project or styling for motions, ... .
 
-> `useRefStore(initialRefStore, isFunction = false)`
+>`useRefStore(initialRefStore, isFunction = false)`
 
 <br />
 
 You can store a function in useRefStore to use it anywhere
 
-> `useRefStore(() => console.log('hi'), true)`
+
+>`useRefStore(() => console.log('hi'), true)`
 
 <br />
 And you can specify isFunction as a second parameter again when you invoked setRef.
 <br />
 <br />
+
 
 ```jsx
 import { useRef } from 'react'
