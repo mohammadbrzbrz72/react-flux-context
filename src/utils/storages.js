@@ -1,57 +1,51 @@
 export class Storage {
   static getLocal(key) {
-    return JSON.parse(localStorage.getItem(key));
-  }
-  static getSession(key) {
-    return JSON.parse(sessionStorage.getItem(key));
+    return JSON.parse(localStorage.getItem(key))
   }
   static setLocal(key, data) {
-    localStorage.setItem(key, JSON.stringify(data));
+    localStorage.setItem(key, JSON.stringify(data))
+  }
+  static getSession(key) {
+    return JSON.parse(sessionStorage.getItem(key))
   }
   static setSession(key, data) {
-    sessionStorage.setItem(key, JSON.stringify(data));
+    sessionStorage.setItem(key, JSON.stringify(data))
   }
   static cache() {}
 }
 
 const getStoredDataFromStorage = (storage, storageKey, state) => {
   switch (storage) {
-    case "local":
-      return Storage.getLocal(storageKey) ?? state;
+    case 'local':
+      return Storage.getLocal(storageKey) ?? state
 
-    case "session":
-      return Storage.getSession(storageKey) ?? state;
-
-    case "indexdb":
-      return;
-
-    case "cache":
-      return;
+    case 'session':
+      return Storage.getSession(storageKey) ?? state
 
     default:
-      return state;
+      return state
   }
-};
+}
 
 export function getStoredState(collections) {
-  const collectionStatesArray = Object.entries(collections.states);
+  const collectionStatesArray = Object.entries(collections.states)
 
   const getAllStates = collectionStatesArray.map(([key, data]) => {
     const storageData = getStoredDataFromStorage(
       collections.storages[key].storage,
       collections.storages[key].storageKey,
-      data,
-    );
+      data
+    )
 
     return {
-      [key]: storageData,
-    };
-  });
+      [key]: storageData
+    }
+  })
 
   const newCollection = {
     ...collections,
-    states: Object.assign({}, ...getAllStates),
-  };
+    states: Object.assign({}, ...getAllStates)
+  }
 
-  return newCollection;
+  return newCollection
 }

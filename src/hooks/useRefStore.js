@@ -1,6 +1,6 @@
 import { useRef, useCallback } from 'react'
 
-export function useRefStore({ initialState, isFunction = false }) {
+export function useRefStore(initialState, isFunction) {
   const refStore = useRef(initialState)
 
   const setRefStore = useCallback((data, isDataAFunction = isFunction) => {
