@@ -20,7 +20,7 @@ And it has a redux-thunk and redux-persist usage too with very simple config.
   - [`reducers`](#reducers)
   - [`actions`](#actions)
   - [`create collection`](#create-collection)
-  - [Project Example](#https://github.com/mohammadbrzbrz72/react-flux-context/tree/master/example)
+  - [Project Example](https://github.com/mohammadbrzbrz72/react-flux-context/tree/master/example)
 - [useSelector](#useselector)
 - [useDispatch](#usedispatch)
 - [useMultiDispatch](#usemultidispatch)
