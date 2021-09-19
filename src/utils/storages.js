@@ -32,8 +32,8 @@ export function getStoredState(collections) {
 
   const getAllStates = collectionStatesArray.map(([key, data]) => {
     const storageData = getStoredDataFromStorage(
-      collections.storages[key].storage,
-      collections.storages[key].storageKey,
+      collections.reducers[key].storage,
+      collections.reducers[key].storageKey,
       data
     )
 

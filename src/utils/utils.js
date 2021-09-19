@@ -1,22 +1,27 @@
-export const collectionSeparator = collection => {
+export const collectionSeparator = (collection) => {
   const separateColls = {
     states: {},
-    reducers: {},
-    storages: {},
-  };
+    reducers: {}
+    // storages: {},
+  }
 
   Object.entries(collection).forEach(([key, data]) => {
-    separateColls.states[key] = data.state;
-    separateColls.reducers[key] = data.reducer;
-    separateColls.storages[key] = {
+    separateColls.states[key] = data.state
+    separateColls.reducers[key] = {
+      reducer: data.reducer,
       storage: data.storage,
-      storageKey: data.storageKey,
-    };
-  });
+      storageKey: data.storageKey
+    }
+    // separateColls.reducers[key] = data.reducer;
+    // separateColls.storages[key] = {
+    //   storage: data.storage,
+    //   storageKey: data.storageKey,
+    // };
+  })
 
-  return separateColls;
-};
+  return separateColls
+}
 
 export const returnStateByUseSelectorArg = (data, callback) => {
-  return callback ? callback(data) : data;
-};
+  return callback ? callback(data) : data
+}

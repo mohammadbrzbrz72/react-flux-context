@@ -1,7 +1,7 @@
 import { useContext, useMemo, useRef } from 'react'
 
 import { isItDefenitlyArrayOfFunction } from '../helper'
-import { ContextStore } from '../store'
+import { ContextDisptach } from '../store'
 
 export function useMultiDispatch(dispatchesCallBack) {
   const isNotInvoked = useRef(true)
@@ -12,7 +12,7 @@ export function useMultiDispatch(dispatchesCallBack) {
     isNotInvoked.current = false
   }
 
-  const [, dispatch] = useContext(ContextStore)
+  const dispatch = useContext(ContextDisptach)
 
   const _dispatchesCallBack = useMemo(
     () =>

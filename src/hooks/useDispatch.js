@@ -1,7 +1,7 @@
 import { useContext, useCallback, useRef } from 'react'
 
 import { isItDefenitlyAFunction } from '../helper'
-import { ContextStore } from '../store'
+import { ContextDisptach } from '../store'
 
 export function useDispatch(dispatchCallBack) {
   const isNotInvoked = useRef(true)
@@ -12,12 +12,13 @@ export function useDispatch(dispatchCallBack) {
     isNotInvoked.current = false
   }
 
-  const [, dispatch] = useContext(ContextStore)
+  const dispatch = useContext(ContextDisptach)
 
   const _dispatchCallBack = useCallback(
     (...props) => dispatchCallBack(dispatch, ...props),
     []
   )
 
+  console.log('dispatch again')
   return _dispatchCallBack
 }

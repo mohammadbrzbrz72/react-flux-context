@@ -16,7 +16,7 @@ export function useFluxMultiContext(selectorCallback, dispatchesCallBack) {
     isItDefenitlyArrayOfFunction(dispatchesCallBack)
   }
 
-  const [{ states }, dispatch] = useContext(ContextStore)
+  const [states, dispatch] = useContext(ContextStore)
 
   if (isNotInvoked.current) {
     _dispatchesCallBack.current = dispatchesCallBack.map(

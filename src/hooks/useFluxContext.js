@@ -1,4 +1,4 @@
-import { useContext, useCallback, useRef } from 'react'
+import { useContext, useCallback, useRef, useMemo } from 'react'
 
 import {
   isItDefenitlyAFunction,
@@ -17,15 +17,20 @@ export function useFluxContext(selectorCallback, dispatchCallBack) {
     isNotInvoked.current = false
   }
 
-  const [{ states }, dispatch] = useContext(ContextStore)
+  const [states, dispatch] = useContext(ContextStore)
 
   const _dispatchCallBack = useCallback(
     (...props) => dispatchCallBack(dispatch, ...props),
     []
   )
 
-  return [
-    returnStateByUseSelectorArg(states, selectorCallback),
-    _dispatchCallBack
-  ]
+  const context = useMemo(
+    () => [
+      returnStateByUseSelectorArg(states, selectorCallback),
+      _dispatchCallBack
+    ],
+    [states]
+  )
+
+  return context
 }
