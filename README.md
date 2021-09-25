@@ -1,6 +1,10 @@
 # react-flux-context
 
-A global store is created by context hook with **flux pattern for** react apps.
+A global store is created by context hook with **flux pattern** for react apps.
+
+**`bundle size:`** <br/>
+- **`unpackage size:     4.4KB`** <br/>
+- **`gzip size: 1.6KB`** <br/>
 
 You can structure your store by reducers, actions, types like a redux pattern, but it has a easier setup to use it and very small size.
 
@@ -20,7 +24,7 @@ And it has a redux-thunk and redux-persist usage too with very simple config.
   - [`reducers`](#reducers)
   - [`actions`](#actions)
   - [`create collection`](#create-collection)
-  - [Project Example](https://github.com/mohammadbrzbrz72/react-flux-context/tree/master/example)
+  - [`Project Example`](https://github.com/mohammadbrzbrz72/react-flux-context/tree/master/example)
 - [useSelector](#useselector)
 - [useDispatch](#usedispatch)
 - [useMultiDispatch](#usemultidispatch)
@@ -68,11 +72,11 @@ In your types folder, you create a file according to your requirements
 <br/>
 
 ```jsx
-export const REGISTER_REQUEST = 'REGISTER_REQUEST'
+export const REGISTER_REQUEST = "REGISTER_REQUEST";
 
-export const REGISTER_SUCCESS = 'REGISTER_SUCCESS'
+export const REGISTER_SUCCESS = "REGISTER_SUCCESS";
 
-export const REGISTER_FAILURE = 'REGISTER_FAILURE'
+export const REGISTER_FAILURE = "REGISTER_FAILURE";
 ```
 
 [go to List](#list)
@@ -90,41 +94,41 @@ In reducers files, set your initial state and reducer which is relevant to your 
 import {
   REGISTER_REQUEST,
   REGISTER_SUCCESS,
-  REGISTER_FAILURE
-} from '../types/authTypes'
+  REGISTER_FAILURE,
+} from "../types/authTypes";
 
 export const authState = {
   role: null,
   token: null,
   isLogin: false,
-  loading: false
-}
+  loading: false,
+};
 
 export const authReducer = (state, { type, payload }) => {
   switch (type) {
     case REGISTER_REQUEST:
       return {
         ...state,
-        loading: true
-      }
+        loading: true,
+      };
 
     case REGISTER_SUCCESS:
       return {
         ...payload,
         isLogin: true,
-        loading: false
-      }
+        loading: false,
+      };
 
     case REGISTER_FAILURE:
       return {
         ...payload,
-        loading: false
-      }
+        loading: false,
+      };
 
     default:
-      throw new Error('there is no type for authReducers')
+      throw new Error("there is no type for authReducers");
   }
-}
+};
 ```
 
 [go to List](#list)
@@ -151,34 +155,34 @@ If you want to give data to your reducers, set a payload as keyword. (like a fet
 import {
   REGISTER_REQUEST,
   REGISTER_SUCCESS,
-  REGISTER_FAILURE
-} from '../types/authTypes'
-import { loginApi } from '../../services'
+  REGISTER_FAILURE,
+} from "../types/authTypes";
+import { loginApi } from "../../services";
 
 // Login actions
 const authRequsetAction = (dispatch) => {
-  dispatch({ key: 'auth', type: REGISTER_REQUEST })
-}
+  dispatch({ key: "auth", type: REGISTER_REQUEST });
+};
 
 const authSuccessAction = (dispatch, payload) => {
-  dispatch({ key: 'auth', type: REGISTER_SUCCESS, payload })
-}
+  dispatch({ key: "auth", type: REGISTER_SUCCESS, payload });
+};
 
 const authFailureAction = (dispatch) => {
-  dispatch({ key: 'auth', type: REGISTER_FAILURE })
-}
+  dispatch({ key: "auth", type: REGISTER_FAILURE });
+};
 
 export const authLoginAction = (dispatch) => {
-  authRequsetAction(dispatch)
+  authRequsetAction(dispatch);
 
   loginApi()
     .then((res) => {
-      authSuccessAction(dispatch, res)
+      authSuccessAction(dispatch, res);
     })
     .catch((err) => {
-      authFailureAction(dispatch)
-    })
-}
+      authFailureAction(dispatch);
+    });
+};
 ```
 
 [go to List](#list)
@@ -196,36 +200,36 @@ If you want to `persist` your data, set a **storage** type and **storageKey**
 > local (localStorage) <br />
 > session (sessionStorage)
 >
-> **storageKey**:  <br />
+> **storageKey**: <br />
 > "some text"
 
 ```jsx
-import { FluxContextProvider } from 'react-flux-context'
+import { FluxContextProvider } from "react-flux-context";
 
-import { authState, authReducer } from './reducers/authReducer'
-import { userState, usersReducer } from './reducers/usersReducer'
+import { authState, authReducer } from "./reducers/authReducer";
+import { userState, usersReducer } from "./reducers/usersReducer";
 
 const storeCollection = {
   user: {
     state: userState,
-    reducer: usersReducer
+    reducer: usersReducer,
   },
   auth: {
     // persist your data in storage automatically
     // it works like a redux-persist but has a very easier config
     state: authState,
     reducer: authReducer,
-    storage: 'local', // local | session
-    storageKey: '_myAuthKey_'
-  }
-}
+    storage: "local", // local | session
+    storageKey: "_myAuthKey_",
+  },
+};
 
 export default function ContextProvider({ children }) {
   return (
     <FluxContextProvider store={storeCollection}>
       {children}
     </FluxContextProvider>
-  )
+  );
 }
 ```
 
@@ -241,19 +245,19 @@ export default function ContextProvider({ children }) {
 Select your state with callback function or set nulish data to get states.
 
 ```jsx
-import { useSelector } from 'react-flux-context'
+import { useSelector } from "react-flux-context";
 
 function Component() {
-  const userData = useSelector((data) => data.user)
+  const userData = useSelector((data) => data.user);
   // or
-  const { user } = useSelector()
+  const { user } = useSelector();
 
   return (
     <div>
       <p> user fullname: {userData.fullname} </p>
       <p> user fullname: {user.fullname} </p>
     </div>
-  )
+  );
 }
 ```
 
@@ -269,22 +273,22 @@ function Component() {
 useDispatch get actions in param and then dispather is ready to be used.
 
 ```jsx
-import { useDispatch } from 'react-flux-context'
-import { userAction } from '../store/actions/userAction'
+import { useDispatch } from "react-flux-context";
+import { userAction } from "../store/actions/userAction";
 
 function Component() {
-  const userDispath = useDispatch(userAction)
+  const userDispath = useDispatch(userAction);
 
   useEffect(() => {
-    userDispath()
-  }, [])
+    userDispath();
+  }, []);
 
   return (
     <div>
       // or you can use with click event
       <button onClick={() => userDispath()}>get user</button>
     </div>
-  )
+  );
 }
 ```
 
@@ -300,26 +304,26 @@ function Component() {
 You can use multiple actions with useMultiDispatch
 
 ```jsx
-import { useMultiDispatch } from 'react-flux-context'
-import { userAction } from '../store/actions/userAction'
-import { logoutAction } from '../store/actions/authAction'
+import { useMultiDispatch } from "react-flux-context";
+import { userAction } from "../store/actions/userAction";
+import { logoutAction } from "../store/actions/authAction";
 
 function Component() {
   const [userDispath, logoutAction] = useMultiDispatch([
     userAction,
-    logoutAction
-  ])
+    logoutAction,
+  ]);
 
   useEffect(() => {
-    userDispath()
-  }, [])
+    userDispath();
+  }, []);
 
   return (
     <div>
       // or you can use with onClick and other event!
       <button onClick={() => logoutAction()}>get user</button>
     </div>
-  )
+  );
 }
 ```
 
@@ -336,16 +340,16 @@ First argument is like a useSelector. <br/>
 Second argument is like a useDispatch .
 
 ```jsx
-import { useMultiDispatch } from 'react-flux-context'
-import { userAction } from '../store/actions/userAction'
+import { useMultiDispatch } from "react-flux-context";
+import { userAction } from "../store/actions/userAction";
 
 function Component() {
   const [userData, userDispatch] = useFluxMultiContext(
     (data) => data.user,
     userAction
-  )
+  );
 
-  return <> ... </>
+  return <> ... </>;
 }
 ```
 
@@ -362,17 +366,17 @@ First argument is like a useSelector.
 Second argument is like a useMultiDispatch .
 
 ```jsx
-import { useMultiDispatch } from 'react-flux-context'
-import { logoutAction } from '../store/actions/authAction'
-import { userAction } from '../store/actions/userAction'
+import { useMultiDispatch } from "react-flux-context";
+import { logoutAction } from "../store/actions/authAction";
+import { userAction } from "../store/actions/userAction";
 
 function Component() {
   const [{ user, auth }, [logoutDispatch, userDispatch]] = useFluxMultiContext(
     null,
     [logoutAction, userAction]
-  )
+  );
 
-  return <> ... </>
+  return <> ... </>;
 }
 ```
 
@@ -387,33 +391,31 @@ function Component() {
 
 You can use it for binary stream data in webrtc project or styling for motions, ... .
 
->`useRefStore(initialRefStore, isFunction = false)`
+> `useRefStore(initialRefStore, isFunction = false)`
 
 <br />
 
 You can store a function in useRefStore to use it anywhere
 
-
->`useRefStore(() => console.log('hi'), true)`
+> `useRefStore(() => console.log('hi'), true)`
 
 <br />
 And you can specify isFunction as a second parameter again when you invoked setRef.
 <br />
 <br />
 
-
 ```jsx
-import { useRef } from 'react'
-import { useRefStore } from 'react-flux-context'
+import { useRef } from "react";
+import { useRefStore } from "react-flux-context";
 
 function Component() {
-  const elmRef = useRef()
-  const [myRef, setMyRef] = useRefStore(0)
+  const elmRef = useRef();
+  const [myRef, setMyRef] = useRefStore(0);
 
   const moveForward = () => {
-    setMyRef(myRef.current + 10)
-    ref.current.style.top = myRef.current
-  }
+    setMyRef(myRef.current + 10);
+    ref.current.style.top = myRef.current;
+  };
 
   return (
     <div>
@@ -421,7 +423,7 @@ function Component() {
 
       <div ref={elmRef}>translate this element</div>
     </div>
-  )
+  );
 }
 ```
 
