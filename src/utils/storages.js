@@ -11,7 +11,6 @@ export class Storage {
   static setSession(key, data) {
     sessionStorage.setItem(key, JSON.stringify(data))
   }
-  static cache() {}
 }
 
 const getStoredDataFromStorage = (storage, storageKey, state) => {

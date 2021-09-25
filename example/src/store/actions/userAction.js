@@ -5,16 +5,19 @@ import {
 } from '../types/userTypes'
 import { userApi } from '../../services'
 
+// set key to select collection reducer;
+const key = 'user'
+
 const userRequsetAction = (dispatch) => {
-  dispatch({ key: 'user', type: USER_INFO_REQUEST })
+  dispatch({ key, type: USER_INFO_REQUEST })
 }
 
 const userSuccessAction = (dispatch, payload) => {
-  dispatch({ key: 'user', type: USER_INFO_SUCCESS, payload })
+  dispatch({ key, type: USER_INFO_SUCCESS, payload })
 }
 
 const userFailureAction = (dispatch) => {
-  dispatch({ key: 'user', type: USER_INFO_FAILURE })
+  dispatch({ key, type: USER_INFO_FAILURE })
 }
 
 export const userAction = (dispatch) => {

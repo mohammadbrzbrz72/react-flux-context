@@ -3,7 +3,6 @@ import React, { createContext, useReducer, useMemo } from 'react'
 import initializeCollection from './handlers/initializeCollection'
 
 const ContextStore = createContext()
-const ContextDisptach = createContext()
 
 function FluxContextProvider({ store = {}, children }) {
   const [state, dispatch] = useReducer(...initializeCollection(store))
@@ -12,11 +11,9 @@ function FluxContextProvider({ store = {}, children }) {
 
   return (
     <ContextStore.Provider value={contextStore}>
-      <ContextDisptach.Provider value={dispatch}>
-        {children}
-      </ContextDisptach.Provider>
+      {children}
     </ContextStore.Provider>
   )
 }
 
-export { FluxContextProvider, ContextStore, ContextDisptach }
+export { FluxContextProvider, ContextStore }

@@ -7,17 +7,20 @@ import {
 } from '../types/authTypes'
 import { loginApi } from '../../services'
 
+// set key to select collection reducer;
+const key = 'auth'
+
 // Login actions
 const authRequsetAction = (dispatch) => {
-  dispatch({ key: 'auth', type: REGISTER_REQUEST })
+  dispatch({ key, type: REGISTER_REQUEST })
 }
 
 const authSuccessAction = (dispatch, payload) => {
-  dispatch({ key: 'auth', type: REGISTER_SUCCESS, payload })
+  dispatch({ key, type: REGISTER_SUCCESS, payload })
 }
 
 const authFailureAction = (dispatch) => {
-  dispatch({ key: 'auth', type: REGISTER_FAILURE })
+  dispatch({ key, type: REGISTER_FAILURE })
 }
 
 export const authLoginAction = (dispatch) => {
@@ -34,11 +37,11 @@ export const authLoginAction = (dispatch) => {
 
 // Logout actions
 export const logoutRequestAction = (dispatch) => {
-  dispatch({ key: 'auth', type: LOGOUT_REQUEST })
+  dispatch({ key, type: LOGOUT_REQUEST })
 }
 
 export const logoutSuccessAction = (dispatch) => {
-  dispatch({ key: 'auth', type: LOGOUT_SUCCESS })
+  dispatch({ key, type: LOGOUT_SUCCESS })
 }
 
 export const logoutAction = (dispatch) => {

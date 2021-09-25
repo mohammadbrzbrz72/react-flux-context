@@ -1,4 +1,4 @@
-import { useContext, useCallback, useRef, useMemo } from 'react'
+import { useContext, useRef, useMemo } from 'react'
 
 import {
   isItDefenitlyAFunction,
@@ -9,25 +9,26 @@ import { ContextStore } from '../store'
 
 export function useFluxContext(selectorCallback, dispatchCallBack) {
   const isNotInvoked = useRef(true)
+  const _dispatchCallBack = useRef()
 
   if (isNotInvoked.current) {
     isItDefenitlyAFunctionOrNulish(selectorCallback)
     isItDefenitlyAFunction(dispatchCallBack)
-
-    isNotInvoked.current = false
   }
 
   const [states, dispatch] = useContext(ContextStore)
 
-  const _dispatchCallBack = useCallback(
-    (...props) => dispatchCallBack(dispatch, ...props),
-    []
-  )
+  if (isNotInvoked.current) {
+    _dispatchCallBack.current = (...props) =>
+      dispatchCallBack(dispatch, ...props)
+
+    isNotInvoked.current = false
+  }
 
   const context = useMemo(
     () => [
       returnStateByUseSelectorArg(states, selectorCallback),
-      _dispatchCallBack
+      _dispatchCallBack.current
     ],
     [states]
   )

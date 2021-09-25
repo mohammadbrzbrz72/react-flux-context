@@ -4,12 +4,12 @@ import {
   USER_INFO_FAILURE
 } from '../types/userTypes'
 
-export const userState = {
+const userState = {
   loading: false,
   users: []
 }
 
-export const usersReducer = (state, { type, payload }) => {
+const usersReducer = (state, { type, payload }) => {
   switch (type) {
     case USER_INFO_REQUEST:
       return {
@@ -32,4 +32,9 @@ export const usersReducer = (state, { type, payload }) => {
     default:
       throw new Error('there is no type for authReducers')
   }
+}
+
+export const user = {
+  state: userState,
+  reducer: usersReducer
 }

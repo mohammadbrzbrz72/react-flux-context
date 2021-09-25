@@ -6,14 +6,14 @@ import {
   LOGOUT_SUCCESS
 } from '../types/authTypes'
 
-export const authState = {
+const authState = {
   role: '',
   token: null,
   isLogin: false,
   loading: false
 }
 
-export const authReducer = (state, { type, payload }) => {
+const authReducer = (state, { type, payload }) => {
   switch (type) {
     case REGISTER_REQUEST:
       return {
@@ -50,4 +50,15 @@ export const authReducer = (state, { type, payload }) => {
     default:
       throw new Error('there is no type for authReducers')
   }
+}
+
+export const auth = {
+  // when you set a local keyword in storage, this state saved or deleted automaticly in localStorage,
+  // you can use session keyword, it use sessionStorage
+  // * it works like a redux-persist but very easier usage
+
+  state: authState,
+  reducer: authReducer,
+  storage: 'local', // local | session
+  storageKey: '_myAuth_'
 }

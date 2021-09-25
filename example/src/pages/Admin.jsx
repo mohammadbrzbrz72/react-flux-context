@@ -21,7 +21,7 @@ export default function AdminPage() {
   return (
     <div>
       <button onClick={() => logoutDispatch()}>
-        {data.auth.loading ? 'loading...' : 'signout'}
+        {data.auth.loading ? 'loading...' : 'sign out'}
       </button>
       <h1>hello to admin page</h1>
       <br />

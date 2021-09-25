@@ -2,22 +2,18 @@ export const collectionSeparator = (collection) => {
   const separateColls = {
     states: {},
     reducers: {}
-    // storages: {},
   }
 
-  Object.entries(collection).forEach(([key, data]) => {
-    separateColls.states[key] = data.state
-    separateColls.reducers[key] = {
-      reducer: data.reducer,
-      storage: data.storage,
-      storageKey: data.storageKey
+  Object.entries(collection).forEach(
+    ([key, { state, reducer, storage, storageKey }]) => {
+      separateColls.states[key] = state
+      separateColls.reducers[key] = {
+        reducer,
+        storage,
+        storageKey
+      }
     }
-    // separateColls.reducers[key] = data.reducer;
-    // separateColls.storages[key] = {
-    //   storage: data.storage,
-    //   storageKey: data.storageKey,
-    // };
-  })
+  )
 
   return separateColls
 }
