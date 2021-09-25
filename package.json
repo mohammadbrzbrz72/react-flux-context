@@ -1,6 +1,6 @@
 {
   "name": "react-flux-context",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "a global store is created by context hook with flux pattern for react apps",
   "author": "mohammadbrzbrz72",
   "license": "MIT",
